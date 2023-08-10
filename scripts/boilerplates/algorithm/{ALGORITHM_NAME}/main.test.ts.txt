@@ -1,0 +1,6 @@
+import { describe, test } from '../../common/test.generator.js';
+import { {ENTRY_POINT} } from './main.js';
+
+describe('{ALGORITHM_NAME}', function runTest() {
+	test('Case 1').input(null).expect(null).run({ENTRY_POINT});
+});
