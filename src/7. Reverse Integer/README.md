@@ -1,4 +1,4 @@
-# 7. Reverse Integer
+# [7. Reverse Integer](https://leetcode.com/problems/reverse-integer/)
 
 | Difficulty | Likes | UnLikes |
 | ---------- | ----- | ------- |
@@ -10,26 +10,13 @@ Given a signed 32-bit integer `x`, return `x` with its digits reversed. If rever
 
 **Assume the environment does not allow you to store 64-bit integers (signed or unsigned).**
 
-### Example 1:
+### Examples:
 
-```
-Input: x = 123
-Output: 321
-```
-
-### Example 2:
-
-```
-Input: x = -123
-Output: -321
-```
-
-### Example 3:
-
-```
-Input: x = 120
-Output: 21
-```
+| #   | Input      | Output | Explanation |
+| --- | ---------- | ------ | ----------- |
+| 1   | `x = 123`  | `321`  | `---`       |
+| 2   | `x = -123` | `-321` | `---`       |
+| 3   | `x = 120`  | `21`   | `---`       |
 
 ### Constraints:
 
