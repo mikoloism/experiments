@@ -1,5 +1,0 @@
-function {ENTRY_POINT}() {
-	// here...
-}
-
-export { {ENTRY_POINT} }
