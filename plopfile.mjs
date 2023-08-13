@@ -22,27 +22,27 @@ export default function plopfile(plop) {
 					INDEX: groups.EXAMPLE_INDEX,
 					INPUT: groups.EXAMPLE_INPUT.trim(),
 					OUTPUT: groups.EXAMPLE_OUTPUT.trim(),
-					EXPLANATION: (groups.EXAMPLE_EXPLANATION || '`---`').trim(),
+					EXPLANATION: (groups.EXAMPLE_EXPLANATION || '---').trim(),
 				});
 				match = matches.next();
 			}
 		}
 
 		function escapeHtml(text) {
-			const REGEX_INLINE_CODE = /(<code>|<\/code>)/gm;
-			const REGEX_STRONG_TAG = /(<strong>|<\/strong>)/gm;
 			const REGEX_USELESS_TAG =
 				/(<p>|<\/p>|<ul>|<\/ul>|<\/li>|<ol>|<\/ol>|<\/sup>)/gm;
 			const REGEX_EXAMPLES_ALL =
-				/(<p><strong class="example">Example\s*\d:<\/strong><\/p>\s*<pre><strong>Input:<\/strong>(\W|\w).+\s*<strong>Output:<\/strong>(\W\w).+\s*(<strong>Explanation:<\/strong>(\W|\w).+\s*)*<\/pre>\s*)+/gm;
+				/(<p><strong class="example">Example\s*(?<EXAMPLE_INDEX>\d):*<\/strong><\/p>\s*<pre><strong>Input:<\/strong>(?<EXAMPLE_INPUT>.*?)\s*<strong>Output:<\/strong>(?<EXAMPLE_OUTPUT>.*?)\s*(<strong>Explanation:<\/strong>(?<EXAMPLE_EXPLANATION>.*?)\s*)?<\/pre>\s+)+/gm;
 
 			const escaped = text
 				.replace(REGEX_EXAMPLES_ALL, '<!-- EXAMPLES -->')
-				.replace(REGEX_INLINE_CODE, '`')
+				.replace(/<code>/gm, '`')
+				.replace(/<\/code>/gm, '` ')
 				.replace(REGEX_USELESS_TAG, '')
-				.replace(REGEX_STRONG_TAG, '**')
-				.replace(/<sup>/gm, '^')
+				.replace(/<strong>/gm, '**')
+				.replace(/<\/strong>/gm, '** ')
 				.replace(/<li>/gm, '- ')
+				.replace(/<sup>/gm, '^')
 				.replace(/&nbsp;/gm, '')
 				.replace(/&lt;/gm, '<')
 				.replace(/&gt;/gm, '>')
@@ -90,8 +90,8 @@ export default function plopfile(plop) {
 			},
 			{
 				type: 'input',
-				name: 'PROBLEM_UNLIKES',
-				message: 'how much problem unliked?',
+				name: 'PROBLEM_DISLIKES',
+				message: 'how much problem disliked?',
 			},
 			{
 				type: 'editor',
