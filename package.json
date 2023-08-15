@@ -10,6 +10,7 @@
 	},
 	"devDependencies": {
 		"@vitest/ui": "^0.34.1",
+		"leetcode-query": "^0.2.7",
 		"plop": "^3.1.2",
 		"typescript": "^5.1.6",
 		"vite": "^4.4.8",
