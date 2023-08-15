@@ -1,4 +1,4 @@
-import { describe, test } from '../../common/test.generator.js';
+import { describe, test } from '@/vitest.js';
 import { isValid } from './main.js';
 
 describe('20. Valid Parentheses', function runTest() {

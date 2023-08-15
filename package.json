@@ -4,10 +4,13 @@
 		"test": "vitest run",
 		"test:watch": "vitest",
 		"test:ui": "vitest --ui",
+		"test:coverage": "vitest run --coverage",
+		"coverage": "vitest run --coverage",
 		"plop": "plop"
 	},
 	"devDependencies": {
 		"@vitest/ui": "^0.34.1",
+		"leetcode-query": "^0.2.7",
 		"plop": "^3.1.2",
 		"typescript": "^5.1.6",
 		"vite": "^4.4.8",

@@ -1,4 +1,4 @@
-import { describe, test } from '../../common/test.generator.js';
+import { describe, test } from '@/vitest.js';
 import { reverse } from './main.js';
 
 describe('7. Reverse Integer', function testReverseInteger() {
