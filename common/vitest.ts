@@ -1,47 +1,24 @@
-import { expect, it } from 'vitest';
+import { expect, test } from 'vitest';
 
-interface CreateTestProps {
-	caseName: string;
-	inputValue: any[];
-	expectValue: any;
-	eq?: 'toBe' | 'toStrictEqual';
-	fn: Function;
+interface TestCase {
+	name: string;
+	input: unknown[];
+	expect: unknown;
 }
 
-function createTest({
-	caseName,
-	inputValue,
-	expectValue,
-	eq,
-	fn,
-}: CreateTestProps) {
-	const result = fn(...inputValue);
-	it(`${caseName}\n\tInput:  ${inputValue.toString()}\n\tOutput: ${result}\n\tExpect: ${expectValue}`, function testCase() {
-		expect(result)[eq || 'toBe'](expectValue);
-	});
-}
-
-function test(caseName: string) {
+function each(cases: ReadonlyArray<TestCase>) {
 	return {
-		input(...inputValue: any[]) {
-			return {
-				expect(expectValue: any) {
-					return {
-						run(fn: Function, eq?: CreateTestProps['eq']) {
-							createTest({
-								caseName,
-								inputValue,
-								expectValue,
-								eq,
-								fn,
-							});
-						},
-					};
+		test(fn: (...args: any[]) => unknown) {
+			test.each(cases)(
+				`\n  $name\n\tInput:  $input\n\tExpect: $expect`,
+				function (item) {
+					const result = fn.apply(null, item.input);
+					expect(result).toStrictEqual(item.expect);
 				},
-			};
+			);
 		},
 	};
 }
 
 export { describe } from 'vitest';
-export { createTest, test };
+export { each };
