@@ -1,6 +1,10 @@
-import { describe, test } from '@/vitest.js';
+import { describe, each } from '@/vitest.js';
 import { {{PROBLEM_ENTRY_POINT}} } from './main.js';
 
 describe('{{PROBLEM_TITLE}}', function runTest() {
-	test('Case 1').input(null).expect(null).run({{PROBLEM_ENTRY_POINT}});
+	each([
+		{ name: 'Case 1', input: [/* arguments */], expect: /* return */ },
+		{ name: 'Case 2', input: [/* arguments */], expect: /* return */ },
+		{ name: 'Case 3', input: [/* arguments */], expect: /* return */ },
+	]).test({{PROBLEM_ENTRY_POINT}});
 });
