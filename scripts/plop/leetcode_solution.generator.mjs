@@ -1,12 +1,17 @@
-/** @typedef {import('plop').PlopGenerator} PlopGenerator */
-/** @type {PlopGenerator} solutionGenerator */
+/** @typedef {import('plop').PlopGeneratorConfig} PlopGeneratorConfig */
+/** @type {PlopGeneratorConfig} solutionGenerator */
 const leetcode_solution_generator = {
 	description: 'generate leetcode.com solution tempalte',
 	prompts: [
-		{ type: 'input', name: 'PROBLEM_SLUG' },
+		{
+			type: 'input',
+			name: 'PROBLEM_SLUG',
+			message: 'what is question slug?',
+		},
 		{
 			type: 'list',
 			name: 'PROBLEM_LANGUAGE',
+			message: 'choose your language:',
 			choices: [
 				{ type: 'choice', name: 'TypeScript', value: 'typescript' },
 				{ type: 'choice', name: 'JavaScript', value: 'javascript' },
