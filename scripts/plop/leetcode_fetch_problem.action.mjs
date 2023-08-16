@@ -41,7 +41,8 @@ async function leetcode_fetch_problem_action(answers) {
 		.then(function injectToAnswers(injectable) {
 			Object.assign(answers, injectable);
 		});
-	return answers;
+
+	return `Question Title : ${answers.PROBLEM_ID}. ${answers.PROBLEM_TITLE}`;
 }
 
 export { leetcode_fetch_problem_action };

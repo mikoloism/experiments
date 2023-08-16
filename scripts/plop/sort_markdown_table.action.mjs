@@ -99,7 +99,7 @@ function sort_markdown_table_action(answers, config, api) {
 	const markdown_content = fs.readFileSync(markdown_path, file_config);
 	const markdown_sorted = sort_markdown_table(markdown_content);
 	fs.writeFileSync(markdown_path, markdown_sorted, file_config);
-	return answers;
+	return `Question Added to README.md Table`;
 }
 
 export { sort_markdown_table_action };
