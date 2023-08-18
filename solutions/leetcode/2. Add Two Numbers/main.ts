@@ -1,4 +1,4 @@
-import { ListNode } from "./list_node.js";
+import { ListNode } from './list_node.js';
 
 /**
  * Definition for singly-linked list.
