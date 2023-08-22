@@ -12,9 +12,11 @@
     "devDependencies": {
         "@vitest/coverage-v8": "^0.34.1",
         "@vitest/ui": "^0.34.1",
+        "handlebars": "^4.7.8",
         "leetcode-query": "^0.2.7",
         "plop": "^3.1.2",
         "prettier": "3.0.2",
+        "puppeteer-core": "^21.1.0",
         "typescript": "^5.1.6",
         "vite": "^4.4.8",
         "vitest": "^0.34.1"
