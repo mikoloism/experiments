@@ -7,7 +7,8 @@
         "test:ui": "vitest --ui",
         "test:coverage": "vitest run --coverage",
         "coverage": "vitest run --coverage",
-        "plop": "plop"
+        "plop": "plop",
+        "new": "node scripts/generator/main.mjs"
     },
     "devDependencies": {
         "@types/inquirer": "^9.0.3",
