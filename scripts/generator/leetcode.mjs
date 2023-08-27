@@ -3,6 +3,7 @@ import { LeetCode } from 'leetcode-query';
 import * as path from 'node:path';
 import { make_url, readfile, render, writefile } from './common.mjs';
 import { LANGUAGE_MAIN_FILE } from './filename.constants.mjs';
+import { sort_markdown_table } from './engine/sort_markdown_table.mjs';
 
 const URL_TEMPLATE = 'https://leetcode.com/problems/{{ ID }}/';
 
@@ -17,7 +18,7 @@ async function extract_entry_point_name(raw_text) {
 
 async function parse_json(problem, option) {
     const id = problem.questionId;
-    const url = await make_url(URL_TEMPLATE, { ID: id });
+    const url = await make_url(URL_TEMPLATE, { ID: problem.titleSlug });
     const source_code = problem.codeSnippets.find(function (snippet) {
         return snippet.langSlug === option.language;
     });
@@ -98,11 +99,48 @@ async function do_render(data) {
     );
 }
 
+async function do_modify(data) {
+    const actions = [
+        {
+            source: 'solutions/leetcode/README.md',
+            pattern: /\s*<\!\-\- NEW_SOLUTION_ITEMS \-\->/gm,
+            template: `\n| {{PROBLEM_ID}} | [{{PROBLEM_TITLE}}](./{{> DirectoryPath }}/) | {{PROBLEM_DIFFICULTY}} |\n\n<!-- NEW_SOLUTION_ITEMS -->`,
+        },
+    ];
+
+    function DirectoryPath(data) {
+        return encodeURI(
+            '{{PROBLEM_ID}}. {{PROBLEM_TITLE}}'
+                .replace('{{PROBLEM_ID}}', data.PROBLEM_ID)
+                .replace('{{PROBLEM_TITLE}}', data.PROBLEM_TITLE),
+        );
+    }
+
+    return await Promise.all(
+        actions.map(async function (action) {
+            const source = path.join(process.cwd(), action.source);
+            const file_content = await readfile(source);
+            const compiled_replacement = render(action.template, data, {
+                partials: { DirectoryPath },
+            });
+            const replaced_content = file_content.replace(
+                action.pattern,
+                compiled_replacement,
+            );
+            const markdown_sorted = await sort_markdown_table(replaced_content);
+            await writefile(source, markdown_sorted);
+            return 'modify - '.concat(source);
+        }),
+    );
+}
+
 async function generate() {
     const { id, ...option } = await ask();
     const data = await fetch(id, option);
-    const result = await do_render(data);
-    result.map((message) => console.log(message));
+    const add_result = await do_render(data);
+    const mod_result = await do_modify(data);
+    add_result.map((message) => console.log(message));
+    mod_result.map((message) => console.log(message));
 }
 
 export { URL_TEMPLATE, fetch, parse_json, do_render, generate, ask };
