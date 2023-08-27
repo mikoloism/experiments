@@ -7,15 +7,17 @@
         "test:ui": "vitest --ui",
         "test:coverage": "vitest run --coverage",
         "coverage": "vitest run --coverage",
-        "plop": "plop"
+        "new": "node scripts/generator/main.mjs"
     },
     "devDependencies": {
+        "@types/inquirer": "^9.0.3",
         "@vitest/coverage-v8": "^0.34.1",
         "@vitest/ui": "^0.34.1",
         "handlebars": "^4.7.8",
+        "inquirer": "^9.2.10",
         "leetcode-query": "^0.2.7",
-        "plop": "^3.1.2",
         "prettier": "3.0.2",
+        "puppeteer": "^21.1.0",
         "puppeteer-core": "^21.1.0",
         "typescript": "^5.1.6",
         "vite": "^4.4.8",
