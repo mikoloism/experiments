@@ -1,0 +1,17 @@
+import { describe, each } from '@/vitest.js';
+import { {{PROBLEM_ENTRY_POINT}} } from './solution.js';
+
+
+{{#is_exist PROBLEM_TEST_SNIPPET}}
+describe('{{PROBLEM_TITLE}}', function runFixture(){
+	{{{PROBLEM_TEST_SNIPPET}}}
+})
+{{else}}
+describe('{{PROBLEM_TITLE}}', function runTest() {
+	each([
+		{ name: 'Case 1', input: ['/* arguments */'], expect: '/* return */' },
+		{ name: 'Case 2', input: ['/* arguments */'], expect: '/* return */' },
+		{ name: 'Case 3', input: ['/* arguments */'], expect: '/* return */' },
+	]).test({{PROBLEM_ENTRY_POINT}});
+});
+{{/is_exist}}
