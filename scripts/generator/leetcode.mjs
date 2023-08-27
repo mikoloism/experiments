@@ -73,12 +73,16 @@ async function ask() {
 async function do_render(data) {
     const actions = [
         {
-            source: 'scripts/plop/templates/README.md.hbs',
-            dest: 'solutions/l-{{ PROBLEM_TITLE }}/README.md',
+            source: 'scripts/generator/templates/README.md.hbs',
+            dest: 'solutions/leetcode/{{PROBLEM_ID}}. {{PROBLEM_TITLE}}/README.md',
         },
         {
-            source: 'scripts/plop/templates/main.ts.hbs',
-            dest: 'solutions/l-{{ PROBLEM_TITLE }}/main.ts',
+            source: 'scripts/generator/templates/solution.ts.hbs',
+            dest: 'solutions/leetcode/{{PROBLEM_ID}}. {{PROBLEM_TITLE}}/solution.ts',
+        },
+        {
+            source: 'scripts/generator/templates/solution.test.ts.hbs',
+            dest: 'solutions/leetcode/{{PROBLEM_ID}}. {{PROBLEM_TITLE}}/solution.test.ts',
         },
     ];
 

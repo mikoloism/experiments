@@ -90,12 +90,16 @@ async function ask() {
 async function do_render(data) {
     const actions = [
         {
-            source: 'scripts/plop/templates/README.md.hbs',
-            dest: 'solutions/{{ PROBLEM_TITLE }}/README.md',
+            source: 'scripts/generator/templates/README.md.hbs',
+            dest: 'solutions/codewars/{{ PROBLEM_TITLE }}/README.md',
         },
         {
-            source: 'scripts/plop/templates/main.ts.hbs',
-            dest: 'solutions/{{ PROBLEM_TITLE }}/main.ts',
+            source: 'scripts/generator/templates/solution.ts.hbs',
+            dest: 'solutions/codewars/{{ PROBLEM_TITLE }}/solution.ts',
+        },
+        {
+            source: 'scripts/generator/templates/solution.test.ts.hbs',
+            dest: 'solutions/codewars/{{ PROBLEM_TITLE }}/solution.test.ts',
         },
     ];
 
