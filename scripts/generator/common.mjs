@@ -2,8 +2,30 @@ import Handlebars from 'handlebars';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import puppeteer from 'puppeteer';
+function render(template, data, option) {
+    Handlebars.registerHelper('is_exist', function (v, o) {
+        if (typeof v !== 'undefined') {
+            return o.fn(this);
+        } else {
+            return o.inverse(this);
+        }
+    });
 
-function render(template, data) {
+    if (typeof option === 'object' && option !== null) {
+        if (typeof option['partials'] !== 'undefined') {
+            Object.keys(option.partials).map(function (partialName) {
+                const partialHandler = option.partials[partialName];
+                Handlebars.registerPartial(partialName, partialHandler);
+            });
+        }
+
+        if (typeof option['helpers'] !== 'undefined') {
+            Object.keys(option.helpers).map(function (helperName) {
+                const helperHandler = option.helpers[helperName];
+                Handlebars.registerHelper(helperName, helperHandler);
+            });
+        }
+    }
     return Handlebars.compile(template)(data);
 }
 
