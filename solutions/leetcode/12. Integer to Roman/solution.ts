@@ -1,4 +1,4 @@
-const ROMAN_MAP = new Map()
+const ROMAN_MAP = new Map<number, string>()
     .set(1000, 'M')
     .set(900, 'CM')
     .set(500, 'D')
@@ -15,14 +15,11 @@ const ROMAN_MAP = new Map()
 
 function intToRoman(num: number): string {
     let romaned = '';
-
     for (let [value, symbol] of ROMAN_MAP.entries()) {
-        while (num >= value) {
-            romaned = romaned.concat(symbol);
-            num -= value;
-        }
+        let count = Math.floor(num / value);
+        romaned = romaned.concat(symbol.repeat(count));
+        num -= value * count;
     }
-
     return romaned;
 }
 
